@@ -3,10 +3,11 @@ package com.register.controller;
 import com.register.model.User;
 import com.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/userApi/v1")
@@ -15,10 +16,40 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/saveUser")
-    public User saveUser(@RequestBody User user){
+    @PostMapping("/saveUser")
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        User savedUser = userService.saveUser(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
 
-        return userService.saveUser(user);
 
+    @GetMapping("/getUser/{userId}")
+    public ResponseEntity<User> getUser(@PathVariable long userId) {
+        User user = userService.getUserById(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+
+    @PutMapping("/updateUser/{userId}")
+    public ResponseEntity<User> updateUser(
+            @PathVariable long userId,
+            @RequestBody User user) {
+
+        User updatedUser = userService.updateUser(userId, user);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/deleteUser/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable long userId) {
+        userService.deleteUserById(userId);
+        return new ResponseEntity<>("User deleted successfully", HttpStatus.NOT_FOUND);
     }
 }
