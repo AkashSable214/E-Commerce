@@ -5,25 +5,35 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+    private String UserName;
     private String email;
     private String password;
     private String dob;  // yyyy-mm-dd
     private Long phoneNo;
     private String gender;
-    private String createdDate;
-    private String updatedate;
+    @CreatedBy
+    private LocalDate createdDate;
+
+    @LastModifiedDate
+    private LocalDate updatedate;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
