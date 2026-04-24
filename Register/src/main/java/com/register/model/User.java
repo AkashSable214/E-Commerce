@@ -10,7 +10,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,17 +22,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    private String UserName;
+    private String userName;
     private String email;
     private String password;
-    private String dob;  // yyyy-mm-dd
+    private LocalDate dob;  // yyyy-mm-dd
     private Long phoneNo;
     private String gender;
     @CreatedBy
     private LocalDate createdDate;
 
     @LastModifiedDate
-    private LocalDate updatedate;
+    private LocalDate updateDate;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
