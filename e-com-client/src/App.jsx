@@ -5,11 +5,12 @@ import Register from "@/pages/Register";
 const App = () => {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Register />} />
-        </Routes>
-      </Router>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      {/* Catch-all route for 404 */}
+      <Route path="*" element={<ErrorPage />} />
     </>
   );
 };
