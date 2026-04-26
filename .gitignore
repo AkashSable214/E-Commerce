@@ -1,3 +1,4 @@
 e-com-client/node_modules/
 e-com-client/.vscode/*
 e-com-client/dist
+/.metadata/
