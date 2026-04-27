@@ -28,5 +28,5 @@ npm install
 Or install manually:
 
 ```
-npm install axios react-router-dom react-hook-form bootstrap
+ npm install axios react-router-dom react-hook-form bootstrap react-icons lucide-react
 ```
