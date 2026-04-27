@@ -6,9 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
 
     @Id
@@ -36,19 +36,18 @@ public class Product {
     private int reviewCount;
 
     @Lob
-    private Byte[] image;
+    private byte[] image;
 
     @CreatedDate
-    private LocalDate createdDate;
+    private Date createdDate;
 
     @LastModifiedDate
-    private LocalDate updatedDate;
+    private Date updatedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonBackReference
     private Category category;
-
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -57,17 +56,22 @@ public class Product {
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Inventory inventory;
 
+
+
     //@OneToOne
-    //private Seller seller;
+    // private Seller seller;
 
-    //@OneToOne
-    //private Admin admin;
+    // @OneToOne
+    // private Admin admin;
+    // @JsonBackReference
 
-    //OnetoMany
-    //List<CartItem> cartItem
+    //  @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "order_id")
+    // private Order order;
 
-    //@OnetoMany
-   // private List<OrderItem> orderItem
+    // OnetoMany
+    // List<CartItem> cartItem
 
-
+    // @OnetoMany
+    // private List<OrderItem> orderItem
 }
