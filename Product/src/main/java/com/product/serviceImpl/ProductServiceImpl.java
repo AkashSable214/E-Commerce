@@ -1,10 +1,11 @@
 package com.product.serviceImpl;
 
-import com.product.model.*;
-import com.product.repository.*;
+import com.product.model.Product;
+import com.product.repository.ProductRepository;
 import com.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -73,5 +74,15 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getByBrand(String brand) {
         return productRepository.findByBrand(brand);
     }
-}
 
+
+    @Override
+    public Product saveProductWithImage(Product product, MultipartFile file) throws Exception {
+
+        if (file != null && !file.isEmpty()) {
+            product.setImage(file.getBytes()); // store image as BLOB
+        }
+
+        return productRepository.save(product);
+    }
+}

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
 
     @Id
@@ -33,22 +35,43 @@ public class Product {
     private double rating;
     private int reviewCount;
 
+    @Lob
+    private byte[] image;
+
     @CreatedDate
     private Date createdDate;
 
     @LastModifiedDate
     private Date updatedDate;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
-
-    @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review> reviews;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Inventory inventory;
+
+
+
+    //@OneToOne
+    // private Seller seller;
+
+    // @OneToOne
+    // private Admin admin;
+    // @JsonBackReference
+
+    //  @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "order_id")
+    // private Order order;
+
+    // OnetoMany
+    // List<CartItem> cartItem
+
+    // @OnetoMany
+    // private List<OrderItem> orderItem
 }

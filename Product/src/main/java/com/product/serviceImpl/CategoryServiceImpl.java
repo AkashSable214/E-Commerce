@@ -6,6 +6,7 @@ import com.product.repository.CategoryRepository;
 import com.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -41,7 +42,6 @@ public class CategoryServiceImpl implements CategoryService {
         existing.setDescription(category.getDescription());
         existing.setImageUrl(category.getImageUrl());
         existing.setIsActive(category.getIsActive());
-        existing.setDisplayOrder(category.getDisplayOrder());
 
         return categoryRepository.save(existing);
     }
@@ -55,6 +55,13 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getCategoryById(Long id) {
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
+    }
+
+    @Override
+    public Category saveImage(MultipartFile file) throws Exception{
+        Category img=new Category();
+        img.setImageUrl(file.getBytes());
+        return categoryRepository.save(img);
     }
 
 }

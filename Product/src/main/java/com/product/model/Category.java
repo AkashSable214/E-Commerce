@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -18,23 +19,26 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
-
     private String categoryName;
     private String description;
-    private Long parentCategoryId;
-    private String imageUrl;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] imageUrl;
 
     @CreatedDate
-    private Date createdDate;
+    private LocalDate createdDate;
 
     @LastModifiedDate
-    private Date updatedDate;
+    private LocalDate updatedDate;
 
     private Boolean isActive;
-    private int displayOrder;
     private String slug;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Product> product;
+
+
 }
