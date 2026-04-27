@@ -6,6 +6,7 @@ import com.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 @RestController
@@ -38,6 +39,10 @@ public class CategoryController {
     @PostMapping("/category")
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
         return ResponseEntity.ok(categoryService.createCategory(category));
+    }
+    @PostMapping("/category/img")
+    public ResponseEntity<Category> saveImage(@RequestParam MultipartFile image ) throws Exception {
+        return ResponseEntity.ok(categoryService.saveImage(image));
     }
 
 

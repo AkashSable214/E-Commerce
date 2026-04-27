@@ -2,6 +2,7 @@ package com.product.service;
 
 import com.product.model.Category;
 import com.product.model.Product;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public interface CategoryService {
         void deleteCategory(Long id);
 
         Category getCategoryById(Long id);
+
+        Category saveImage(MultipartFile image) throws Exception;
     }
 
 

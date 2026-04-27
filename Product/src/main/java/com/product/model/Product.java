@@ -7,6 +7,8 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -33,22 +35,39 @@ public class Product {
     private double rating;
     private int reviewCount;
 
+    @Lob
+    private Byte[] image;
+
     @CreatedDate
-    private Date createdDate;
+    private LocalDate createdDate;
 
     @LastModifiedDate
-    private Date updatedDate;
+    private LocalDate updatedDate;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review> reviews;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Inventory inventory;
+
+    //@OneToOne
+    //private Seller seller;
+
+    //@OneToOne
+    //private Admin admin;
+
+    //OnetoMany
+    //List<CartItem> cartItem
+
+    //@OnetoMany
+   // private List<OrderItem> orderItem
+
+
 }

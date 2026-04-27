@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,7 +23,7 @@ public class Inventory {
     private int reOrderLevel;
 
     @LastModifiedDate
-    private Date lastUpdated;
+    private LocalDate lastUpdated;
 
     private Long supplierId;
     private double costPrice;
