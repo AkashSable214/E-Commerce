@@ -3,10 +3,11 @@ package com.register.controller;
 import com.register.model.User;
 import com.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin("http://localhost:5173/")
 @RestController
@@ -52,4 +53,7 @@ public class UserController {
         userService.deleteUserById(userId);
         return new ResponseEntity<>("User deleted successfully", HttpStatus.NOT_FOUND);
     }
+
+
+
 }

@@ -45,7 +45,7 @@ public class User {
     @LastModifiedDate
     private LocalDate updateDate;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Address> address;
 

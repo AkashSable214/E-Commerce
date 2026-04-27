@@ -1,11 +1,15 @@
 package com.register.service;
 
 import com.register.model.User;
+import com.register.repository.UserRepository;
+
+import java.util.List;
 
 import java.util.List;
 
 public interface UserService {
     public User saveUser(User user);
+
 
     public List<User> getAllUsers();
 
@@ -14,5 +18,6 @@ public interface UserService {
     public User updateUser(Long userId,User user);
 
     public String deleteUserById(Long userId);
+
 
 }

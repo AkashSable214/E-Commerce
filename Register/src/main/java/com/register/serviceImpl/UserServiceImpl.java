@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import java.util.Optional;
+
 
 @Service
 @Slf4j
@@ -43,6 +45,7 @@ public class UserServiceImpl implements UserService {
         javaMailSender.send(mailMessage);
         return userRepository.save(user);
     }
+
 
     @Override
     public List<User> getAllUsers() {
@@ -78,4 +81,5 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(userId);
         return  userId+" is deleted successfully";
     }
+
 }
