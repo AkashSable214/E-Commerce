@@ -39,7 +39,7 @@ const ProductDetails = () => {
     return <h3 className="text-center mt-5">Product not found</h3>;
   }
 
-  // 🔥 Discount %
+  // Discount %
   const discountPercent = Math.round(
     ((product.price - product.discountPrice) / product.price) * 100
   );

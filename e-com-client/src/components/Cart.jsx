@@ -7,13 +7,13 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-  // 💰 TOTAL
+  //  TOTAL
   const total = cart.reduce(
     (sum, item) => sum + (item.discountPrice || item.price) * item.quantity,
     0,
   );
 
-  // 💸 ORIGINAL TOTAL
+  //  ORIGINAL TOTAL
   const originalTotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
