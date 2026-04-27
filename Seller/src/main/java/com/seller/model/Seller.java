@@ -2,6 +2,8 @@ package com.seller.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.seller.dto.Address;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -29,7 +31,6 @@ public class Seller {
     private String businessType;
     private String businessRegistration;
     private String businessPan;
-    private String bankDetails;
 
     @CreatedDate
     private LocalDate createdDate;
@@ -39,10 +40,15 @@ public class Seller {
 
     private String gstNumber;
 
-    
     private Long addressId;
 
-   
-    @Transient
+ @Transient
+    //@OneToOne(mappedBy = "seller", cascade = CascadeType.ALL)
     private Address address;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "bank_id")
+    @JsonBackReference
+    private Bank bankDetails;
 }

@@ -1,15 +1,22 @@
 package com.register.model;
 
+import static jakarta.persistence.CascadeType.ALL;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static jakarta.persistence.CascadeType.ALL;
-
 @Entity
-@Table(name="SellerAddress")
+//@Table(name="SellerAddress")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,4 +37,8 @@ public class Address {
     @JoinColumn(name="user_id")
     @JsonBackReference
     private User user;
+    
+   
+    
+    
 }

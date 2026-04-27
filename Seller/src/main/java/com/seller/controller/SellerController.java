@@ -1,6 +1,8 @@
 package com.seller.controller;
 
 import com.seller.model.Seller;
+import com.seller.model.SellerInvoice;
+import com.seller.service.SellerInvoiceService;
 import com.seller.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,9 @@ public class SellerController {
 
     @Autowired
     private SellerService sellerService;
+
+    @Autowired
+    private SellerInvoiceService sellerInvoiceService;
 
     @GetMapping(value="/getAllSeller")
     public ResponseEntity<List<Seller>> getAllSeller(){
@@ -53,6 +58,25 @@ public class SellerController {
         } else {
             return ResponseEntity.notFound().build(); // 404
         }
+    }
+
+    @PostMapping("/payment-update")
+    public ResponseEntity<String> updateSellerAfterPayment(
+            @RequestParam Long invoiceId,
+            @RequestBody byte[] pdf) {
+
+        SellerInvoice invoice = new SellerInvoice();
+        invoice.setInvoiceId(invoiceId);
+        invoice.setInvoicePdf(pdf);
+
+        sellerInvoiceService.saveSellerInvoice(invoice);
+
+        return ResponseEntity.ok("Saved in Seller");
+    }
+
+    @PostMapping("/invoice/save")
+    public void saveSellerInvoice(@RequestBody SellerInvoice invoice){
+        sellerInvoiceService.saveSellerInvoice(invoice);
     }
 
 }

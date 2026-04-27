@@ -1,4 +1,4 @@
-package com.seller.model;
+package com.seller.dto;
 
 import lombok.Data;
 

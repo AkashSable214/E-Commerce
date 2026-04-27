@@ -1,6 +1,8 @@
 package com.register.controller;
 
 import com.register.model.User;
+import com.register.model.UserInvoice;
+import com.register.service.UserInvoiceService;
 import com.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserInvoiceService userInvoiceService;
 
     @PostMapping("/saveUser")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
@@ -52,4 +57,18 @@ public class UserController {
         userService.deleteUserById(userId);
         return new ResponseEntity<>("User deleted successfully", HttpStatus.NOT_FOUND);
     }
+
+//    @PostMapping("/users/invoice")
+//    public ResponseEntity<String> saveInvoiceReference(
+//            @RequestParam Long invoiceId,
+//            @RequestParam Long userId) {
+//
+//        return ResponseEntity.ok("Saved");
+//    }
+
+    @PostMapping("/invoice/save")
+    public void saveInvoiceReference(@RequestBody UserInvoice userInvoice){
+        userInvoiceService.saveInvoice(userInvoice);
+    }
+
 }
