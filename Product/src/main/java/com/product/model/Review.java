@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,7 +22,7 @@ public class Review {
     private String comment;
 
     @CreatedDate
-    private Date reviewDate;
+    private LocalDate reviewDate;
 
     private Boolean isVerifiedPurchase;
     private int likes;

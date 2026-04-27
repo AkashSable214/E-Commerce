@@ -1,6 +1,7 @@
 package com.product.service;
 
-import com.product.model.*;
+import com.product.model.Product;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,5 +22,6 @@ public interface ProductService {
     List<Product> getByPrice(double price);
 
     List<Product> getByBrand(String brand);
-}
 
+    Product saveProductWithImage(Product product, MultipartFile file) throws Exception;
+}
