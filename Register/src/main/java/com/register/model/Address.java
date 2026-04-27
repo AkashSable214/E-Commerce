@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
+@Table(name="SellerAddress")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
