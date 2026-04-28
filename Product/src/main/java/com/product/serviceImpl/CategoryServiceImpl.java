@@ -58,10 +58,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category saveImage(MultipartFile file) throws Exception{
-        Category img=new Category();
-        img.setImageUrl(file.getBytes());
-        return categoryRepository.save(img);
+    public Category saveImage(MultipartFile file) throws Exception {
+        Category category = new Category();
+        category.setImageUrl(file.getBytes());
+       return categoryRepository.save(category);
     }
 
 }
