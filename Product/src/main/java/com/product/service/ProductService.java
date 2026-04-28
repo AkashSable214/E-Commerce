@@ -1,9 +1,10 @@
 package com.product.service;
 
-import com.product.model.Product;
-import org.springframework.web.multipart.MultipartFile;
+import com.product.model.*;
 
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductService {
 
@@ -11,7 +12,7 @@ public interface ProductService {
 
     Product getProductById(Long productId);
 
-    Product createProduct(Product product);
+    Product createProduct (Product product,MultipartFile imageFile);
 
     Product updateProduct(Long id, Product product);
 
@@ -22,6 +23,5 @@ public interface ProductService {
     List<Product> getByPrice(double price);
 
     List<Product> getByBrand(String brand);
-
-    Product saveProductWithImage(Product product, MultipartFile file) throws Exception;
 }
+

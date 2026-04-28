@@ -1,12 +1,13 @@
 package com.product.serviceImpl;
 
-import com.product.model.Product;
-import com.product.repository.ProductRepository;
+import com.product.model.*;
+import com.product.repository.*;
 import com.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -27,8 +28,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
+    public Product createProduct(Product product, MultipartFile imageFile) {
+        try {
+            if (imageFile != null && !imageFile.isEmpty()) {
+                product.setImage(imageFile.getBytes());
+            }
+            return productRepository.save(product);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to store image", e);
+        }
     }
 
     @Override
@@ -74,15 +82,5 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getByBrand(String brand) {
         return productRepository.findByBrand(brand);
     }
-
-
-    @Override
-    public Product saveProductWithImage(Product product, MultipartFile file) throws Exception {
-
-        if (file != null && !file.isEmpty()) {
-            product.setImage(file.getBytes()); // store image as BLOB
-        }
-
-        return productRepository.save(product);
-    }
 }
+

@@ -1,11 +1,11 @@
 package com.product.serviceImpl;
 
-import com.product.model.Inventory;
-import com.product.model.Product;
-import com.product.repository.InventoryRepository;
-import com.product.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.product.model.Inventory;
+import com.product.repository.InventoryRepository;
+import com.product.service.InventoryService;
 
 @Service
 public class InventoryServiceImpl implements InventoryService {
