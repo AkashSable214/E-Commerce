@@ -24,14 +24,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
-	
-
 	@Override
 	public User saveUser(User user) {
 
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(user.getEmail());
-		mailMessage.setSubject("Register Successfully");
+
 		mailMessage.setSubject("Registration Successful - E-Commerce");
 
 		mailMessage.setText("Dear " + user.getUserName() + ",\n\n"
