@@ -9,11 +9,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.register.model.User;
-import com.register.repository.AddressRepository;
 import com.register.repository.UserRepository;
 import com.register.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -22,8 +24,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
-	@Autowired
-	private AddressRepository addressRepository;
+	
 
 	@Override
 	public User saveUser(User user) {
