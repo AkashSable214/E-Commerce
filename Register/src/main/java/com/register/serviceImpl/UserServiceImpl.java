@@ -32,17 +32,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User saveUser(User user) {
-
-<<<<<<< HEAD
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(user.getEmail());
 		mailMessage.setSubject("Register Successfully");
 		mailMessage.setSubject("Registration Successful - E-Commerce");
-=======
 
     @Override
     public List<User> getAllUsers() {
->>>>>>> 0a3d04e91875f7466c6f7d9b427cb1302c2264e6
 
 		mailMessage.setText("Dear " + user.getUserName() + ",\n\n"
 				+ "🎉 Congratulations! Your registration on our E-Commerce platform was successful.\n\n"
@@ -65,7 +61,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findById(userId).get();
 	}
 
-<<<<<<< HEAD
 	@Override
 	public User updateUser(Long userId, User user) {
 		Optional<User> oUser = userRepository.findById(userId);
@@ -88,12 +83,10 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteById(userId);
 		return userId + " is deleted successfully";
 	}
-=======
     @Override
     public String deleteUserById(Long userId) {
         userRepository.deleteById(userId);
         return  userId+" is deleted successfully";
     }
 
->>>>>>> 0a3d04e91875f7466c6f7d9b427cb1302c2264e6
 }
