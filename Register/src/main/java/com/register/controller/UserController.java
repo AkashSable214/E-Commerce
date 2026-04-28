@@ -5,12 +5,13 @@ import com.register.model.UserInvoice;
 import com.register.service.UserInvoiceService;
 import com.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
+@CrossOrigin("http://localhost:5173/")
 @RestController
 @RequestMapping(value="/userApi/v1")
 public class UserController {
@@ -58,6 +59,7 @@ public class UserController {
         return new ResponseEntity<>("User deleted successfully", HttpStatus.NOT_FOUND);
     }
 
+<<<<<<< HEAD
 //    @PostMapping("/users/invoice")
 //    public ResponseEntity<String> saveInvoiceReference(
 //            @RequestParam Long invoiceId,
@@ -70,5 +72,8 @@ public class UserController {
     public void saveInvoiceReference(@RequestBody UserInvoice userInvoice){
         userInvoiceService.saveInvoice(userInvoice);
     }
+=======
+
+>>>>>>> 0a3d04e91875f7466c6f7d9b427cb1302c2264e6
 
 }
