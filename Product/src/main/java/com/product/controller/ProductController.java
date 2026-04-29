@@ -1,6 +1,10 @@
 package com.product.controller;
 
+import com.product.model.*;
+import com.product.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.product.model.Product;
 import com.product.service.ProductService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/productApi/v1")
 @CrossOrigin(origins = "*")
@@ -27,7 +33,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    
+
 //    @PostMapping(value = "/product", consumes = "multipart/form-data")
 //    public ResponseEntity<?> createProduct(
 //            @RequestPart("product") Product product,
@@ -40,7 +46,7 @@ public class ProductController {
 //            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
 //    }
-    
+
 //    @PostMapping(value = "/product", consumes = {"multipart/form-data"})
 //    public ResponseEntity<?> createProduct(
 //            @RequestPart("product") Product product,
@@ -49,10 +55,10 @@ public class ProductController {
 //        Product saved = productService.createProduct(product, imageFile);
 //        return new ResponseEntity<>(saved, HttpStatus.CREATED);
 //    }
-    
-    
-    
-    @PostMapping(value = "/product", consumes = "multipart/form-data")
+
+
+
+    @PostMapping(value = "/product", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createProduct(
             @RequestPart("product") String productStr,
             @RequestPart(value = "imageFile", required = false) MultipartFile imageFile) {
@@ -69,13 +75,13 @@ public class ProductController {
         }
     }
 
-    
+
     @GetMapping("/product/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
-   
+
 //    @GetMapping("/product/image/{id}")
 //    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
 //        Product product = productService.getProductById(id);
@@ -85,10 +91,17 @@ public class ProductController {
 //                .body(product.getImage());
 //    }
 
-   
+
     @DeleteMapping("/product/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.ok("Deleted successfully");
+    }
+
+    @GetMapping("/all-product")
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+
+        return ResponseEntity.ok(products);
     }
 }

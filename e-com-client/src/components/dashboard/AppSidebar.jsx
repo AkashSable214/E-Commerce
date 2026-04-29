@@ -26,6 +26,12 @@ const AppSidebar = ({ onLogout }) => {
         >
           Add Products
         </button>
+        <button
+          className="btn btn-light w-100 text-start"
+          onClick={() => navigate("add-category")}
+        >
+          Add Category
+        </button>
       </div>
 
       {/* Logout */}
