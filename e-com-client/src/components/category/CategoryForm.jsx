@@ -5,42 +5,67 @@ import axios from "axios";
 const CategoryForm = () => {
   const { register, handleSubmit, reset } = useForm();
 
+  // const onSubmit = async (data) => {
+  //   const formData = new FormData();
+
+  //   formData.append("categoryName", data.categoryName);
+  //   formData.append("description", data.description);
+  //   formData.append("parentCategoryId", data.parentCategoryId || "");
+  //   formData.append("displayOrder", data.displayOrder || 0);
+  //   formData.append("slug", data.slug);
+  //   formData.append("isActive", data.isActive ?? true);
+
+  //   //  FILE upload (important)
+  //   // formData.append("image", data.image[0]);
+
+  //   try {
+  //     // this is for testing purpose
+  //     // for (let pair of formData.entries()) {
+  //     //   console.log(pair[0], pair[1]);
+  //     // }
+  //     await axios.post(
+  //       "http://localhost:8002/categoryApi/v1/category",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       },
+  //     );
+
+  //     alert("Category Created with Image ");
+  //     reset();
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Error uploading category ");
+  //   }
+  // };
   const onSubmit = async (data) => {
-    const formData = new FormData();
-
-    formData.append("categoryName", data.categoryName);
-    formData.append("description", data.description);
-    formData.append("parentCategoryId", data.parentCategoryId || "");
-    formData.append("displayOrder", data.displayOrder || 0);
-    formData.append("slug", data.slug);
-    formData.append("isActive", data.isActive ?? true);
-
-    //  FILE upload (important)
-    formData.append("image", data.image[0]);
-
     try {
-      // this is for testing purpose
-      // for (let pair of formData.entries()) {
-      //   console.log(pair[0], pair[1]);
-      // }
+      const payload = {
+        categoryName: data.categoryName,
+        description: data.description,
+        slug: data.slug,
+        isActive: data.isActive ?? true,
+      };
+
       await axios.post(
         "http://localhost:8002/categoryApi/v1/category",
-        formData,
+        payload,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         },
       );
 
-      alert("Category Created with Image ✅");
+      alert("Category Created Successfully");
       reset();
     } catch (err) {
       console.error(err);
-      alert("Error uploading category ");
+      alert("Error creating category");
     }
   };
-
   return (
     <div className="container mt-4">
       <div className="card p-4 shadow">
@@ -61,28 +86,16 @@ const CategoryForm = () => {
             {...register("description")}
           />
 
-          {/* Parent */}
-          <input
-            type="number"
-            className="form-control mb-2"
-            placeholder="Parent Category ID"
-            {...register("parentCategoryId")}
-          />
+      
 
           {/* Image Upload  */}
           <input
             type="file"
             className="form-control mb-2"
-            {...register("image", { required: true })}
+            {...register("image")}
           />
 
-          {/* Display Order */}
-          <input
-            type="number"
-            className="form-control mb-2"
-            placeholder="Display Order"
-            {...register("displayOrder")}
-          />
+  
 
           {/* Slug */}
           <input
