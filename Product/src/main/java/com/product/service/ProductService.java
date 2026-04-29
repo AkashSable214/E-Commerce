@@ -23,5 +23,6 @@ public interface ProductService {
     List<Product> getByPrice(double price);
 
     List<Product> getByBrand(String brand);
+    List<Product> getAllProducts();
 }
 

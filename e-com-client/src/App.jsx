@@ -9,7 +9,8 @@ import ProductDetails from "@/components/ProductDetails";
 import DashboardLayout from "@/layout/DashboardLayout";
 import Dashboard from "@/components/dashboard/Dashboard";
 import ProductsPage from "@/components/dashboard/ProductsPage";
-import ProductRegister from "@/components/dashboard/ProductRegister";
+import ProductRegister from "@/components/product/ProductRegister";
+import AddCategoty from "@/components/category/CategoryForm";
 const App = () => {
   return (
     <>
@@ -25,6 +26,7 @@ const App = () => {
             <Route index element={<Dashboard />} />
             <Route path="products" element={<ProductsPage />} />
             <Route path="add-product" element={<ProductRegister />} />
+            <Route path="add-category" element={<AddCategoty />} />
           </Route>
           {/* Catch-all route for 404 */}
           <Route path="*" element={<ErrorPage />} />
